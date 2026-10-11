@@ -1,0 +1,17 @@
+{
+  "name": "agentic-pr-review",
+  "version": "1.0.0",
+  "description": "GitHub Action that checks a pull request against its linked ticket with Claude. A human makes the final call.",
+  "type": "module",
+  "main": "src/review.js",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\""
+  },
+  "keywords": ["github-action", "code-review", "claude", "anthropic", "ai-agents", "jira", "pull-request"],
+  "author": "Hitesh Bhayani",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0"
+  }
+}

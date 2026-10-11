@@ -1,0 +1,52 @@
+name: Agentic PR Review
+description: Checks a pull request against its linked GitHub or Jira ticket with Claude, and leaves one updatable review comment. A human makes the final call.
+author: Hitesh Bhayani
+branding:
+  icon: check-circle
+  color: purple
+
+inputs:
+  anthropic-api-key:
+    description: Anthropic API key
+    required: true
+  github-token:
+    description: Token used to read the PR and post the comment
+    required: false
+    default: ${{ github.token }}
+  model:
+    description: Claude model to use
+    required: false
+    default: claude-sonnet-5-5
+  fail-on:
+    description: "Fail the check when the review finds: never | missing (a requirement is missing) | high (a high-severity regression)"
+    required: false
+    default: never
+  max-diff-chars:
+    description: Character budget for the diff sent to the model
+    required: false
+    default: "60000"
+
+outputs:
+  review:
+    description: The structured review as JSON
+    value: ${{ steps.review.outputs.review }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Install
+      shell: bash
+      run: npm ci --omit=dev --prefix "${{ github.action_path }}"
+    - name: Review
+      id: review
+      shell: bash
+      run: node "${{ github.action_path }}/src/review.js"
+      env:
+        INPUT_ANTHROPIC_API_KEY: ${{ inputs.anthropic-api-key }}
+        INPUT_GITHUB_TOKEN: ${{ inputs.github-token }}
+        INPUT_MODEL: ${{ inputs.model }}
+        INPUT_FAIL_ON: ${{ inputs.fail-on }}
+        INPUT_MAX_DIFF_CHARS: ${{ inputs.max-diff-chars }}
