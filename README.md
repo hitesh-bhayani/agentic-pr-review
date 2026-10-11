@@ -1,6 +1,6 @@
 # 🤖 Agentic PR Review
 
-A GitHub Action that checks a pull request against **the ticket it claims to implement**, using Claude, and leaves one review comment that updates on every push.
+**[Live page](https://hitesh-bhayani.github.io/agentic-pr-review/)** · A GitHub Action that checks a pull request against **the ticket it claims to implement**, using Claude, and leaves one review comment that updates on every push.
 
 Most AI review bots comment on style. This one answers the questions a reviewer actually has:
 
