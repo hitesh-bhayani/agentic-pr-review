@@ -5,7 +5,7 @@
   "type": "module",
   "main": "src/review.js",
   "scripts": {
-    "test": "node --test \"test/**/*.test.js\""
+    "test": "node --test test/core.test.js test/e2e.test.js"
   },
   "keywords": ["github-action", "code-review", "claude", "anthropic", "ai-agents", "jira", "pull-request"],
   "author": "Hitesh Bhayani",
